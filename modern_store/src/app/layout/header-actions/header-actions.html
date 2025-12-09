@@ -1,0 +1,39 @@
+<mat-toolbar class="w-full shadow-lg py-2">
+    <div class="max-w-7xl mx-auto w-full flex flex-row justify-between">
+
+        <div class="flex flex-row h-full items-center cursor-pointer" [routerLink]="['/products/all']" routerLinkActive="router-link-active" >
+            <lucide-angular [img]="shoppingCart" size="40" class="text-orange-600"></lucide-angular>
+            <h2 class="text-sm text-center mt-7 font-bold ">FlowCart</h2>
+        </div>
+
+        <div></div>
+
+        <div class="flex items-center gap-x-4">
+            <div class="flex flex-row gap-x-3">
+                <lucide-angular [img]="heartIcon"
+                    class="cursor-pointer transition-transform duration-300 ease-out hover:scale-110" routerLink='/wishlist' routerLinkActive="router-link-active" >
+                </lucide-angular>
+
+                <lucide-angular [img]="shoppingCart"
+                    class="cursor-pointer transition-transform duration-300 ease-out hover:scale-110">
+                </lucide-angular>
+            </div>
+
+
+            <div class="space-x-4">
+                <button class="bg-black text-white text-sm px-4 py-2 rounded-xl cursor-pointer
+               transition-all duration-300 ease-out
+               hover:scale-105 hover:bg-gray-900">
+                    Sign In
+                </button>
+
+                <button class="text-sm border border-gray-950 px-4 py-2 rounded-xl cursor-pointer
+               transition-all duration-300 ease-out
+               hover:scale-105 hover:bg-gray-100">
+                    Sign Up
+                </button>
+            </div>
+
+        </div>
+    </div>
+</mat-toolbar>
