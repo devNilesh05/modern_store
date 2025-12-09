@@ -1,0 +1,63 @@
+<mat-sidenav-container class="w-full h-full">
+
+    <mat-sidenav mode="side" opened >
+        <div class="p-6">
+            <h2 class="text-lg text-gray-900">Categories</h2>
+
+            <mat-nav-list>
+                @for(cate of categories(); track category){
+                    <mat-list-item [activated]="cate === category()" class="my-2" [routerLink]="['/products', cate]" [ngClass]="cate === category() ? 'text-black text-lg font-semibold': null">
+                        <span matListItemTitle>{{cate | titlecase}}</span>
+                    </mat-list-item>
+                }
+            </mat-nav-list>
+        </div>
+    </mat-sidenav>
+
+
+    <mat-sidenav-content class="bg-gray-100  p-6 h-full">
+        <h1 class="text-2xl  font-bold mb-2  capitalize">{{ category() }}</h1>
+        <p class="text-base text-gray-600 mb-6 font-semibold">{{filteredProducts().length}} product found </p>
+
+        <div class="grid grid-cols-3 w-auto  gap-6">
+            @for (product of filteredProducts(); track product.id) {
+            <div
+                class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group transform hover:-translate-y-1 cursor-pointer">
+                <!-- Image -->
+                <div class="w-full h-[350px] bg-white flex items-center justify-center overflow-hidden">
+                    <img [src]="product.imageUrl" alt="{{ product.name }}"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                </div>
+
+                <!-- Content -->
+                <div class="p-5 flex flex-col gap-3">
+                    <h3 class="text-lg font-semibold text-gray-900 leading-tight">
+                        {{ product.name }}
+                    </h3>
+
+                    <p class="text-sm text-gray-600 leading-tight line-clamp-2">
+                        {{ product.description }}
+                    </p>
+
+                    <div class="text-sm font-medium" [ngClass]="product.inStock ? 'text-green-600' : 'text-red-600'">
+                        {{ product.inStock ? 'In Stock' : 'Out of Stock' }}
+                    </div>
+
+                    <div class="flex w-full items-center justify-between mt-2">
+                        <span class="text-2xl font-bold text-gray-900">
+                            {{ product.price | currency:'INR' }}
+                        </span>
+
+                        <!-- Add to Cart Button -->
+                        <button
+                            class="flex  items-center gap-2 bg-gray-900 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 hover:bg-gray-800 hover:scale-105 active:scale-95 shadow-md">
+                            <lucide-angular [img]="shoppingIcon" size="20"></lucide-angular>
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>
