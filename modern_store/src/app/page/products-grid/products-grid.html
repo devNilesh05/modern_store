@@ -17,10 +17,10 @@
 
     <mat-sidenav-content class="bg-gray-100  p-6 h-full">
         <h1 class="text-2xl  font-bold mb-2  capitalize">{{ category() }}</h1>
-        <p class="text-base text-gray-600 mb-6 font-semibold">{{filteredProducts().length}} product found </p>
+        <p class="text-base text-gray-600 mb-6 font-semibold">{{ store.filteredProducts().length}} product found </p>
 
         <div class="grid grid-cols-3 w-auto  gap-6">
-            @for (product of filteredProducts(); track product.id) {
+            @for (product of store.filteredProducts(); track product.id) {
             <div
                 class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group transform hover:-translate-y-1 cursor-pointer">
                 <!-- Image -->

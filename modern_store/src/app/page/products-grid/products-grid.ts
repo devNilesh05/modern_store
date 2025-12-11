@@ -1,10 +1,11 @@
-import { Component, computed, input, signal } from '@angular/core';
+import { Component, computed, inject, input, signal } from '@angular/core';
 import { Product } from '../../model/products';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CurrencyPipe, NgClass, TitleCasePipe } from '@angular/common';
 import { LucideAngularModule, ShoppingCart } from 'lucide-angular';
 import { MatSidenav, MatSidenavContainer, MatSidenavContent } from "@angular/material/sidenav"
 import { MatNavList, MatListItem } from "@angular/material/list"
+import { EcommerceStore } from '../../ecommerce-store';
 
 
 @Component({
@@ -345,7 +346,7 @@ export class ProductsGrid {
       inStock: true,
       category: "living"
     }
-  ]);
+  ]); 
 
   shoppingIcon = ShoppingCart
 
@@ -368,17 +369,21 @@ export class ProductsGrid {
       this.category.set(cat.toLowerCase());
       console.log(this.category())
     });
+
+    this.store.setCategory(this.category)
   }
 
-  filteredProducts = computed(() => {
-    const current = this.category().toLowerCase();
+  store = inject(EcommerceStore)
 
-    if (current === 'all') return this.products();
+  // filteredProducts = computed(() => {
+  //   const current = this.category().toLowerCase();
 
-    return this.products().filter(
-      p => p.category.toLowerCase() === current
-    );
-  });
+  //   if (current === 'all') return this.products();
+
+  //   return this.products().filter(
+  //     p => p.category.toLowerCase() === current
+  //   );
+  // });
 
   categories = signal<string[]>(['all', "electronics",
     "home",
@@ -392,4 +397,6 @@ export class ProductsGrid {
     "travel ",
     "tools",
     "accessories"])
+
+
 }
